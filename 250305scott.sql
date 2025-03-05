@@ -777,3 +777,45 @@ begin
 end;
 
 
+
+
+---- <<<   FULL OUTER JOIN  >>> -------------------------------
+--학생 테이블과 교수 테이블을 조인하여 이름, 학년, 지도교수 이름, 직급을 출력
+-- 단, 지도학생을 배정받지 않은 교수 이름 및 
+--  지도교수가 배정되지 않은 학생이름  함께 출력하여라
+--  Oracle 지원 안 함 
+SELECT s.name , s.grade , p.name , p.position
+FROM   student s , professor p
+WHERE  s.profno(+) = p.profno(+)
+ORDER BY p.profno;
+
+
+
+
+---------------------------------------------------------------------------
+-- OUTER JOIN  ***
+-- EQUI JOIN에서 양측 칼럼 값중의 하나가 NULL 이지만 조인 결과로 출력할 필요가 있는 경우
+-- OUTER JOIN 사용
+SELECT s.name , s.grade , p.name , p.position
+FROM    student s , professor p
+WHERE  s.profno = p.profno ;
+
+-- 학생 테이블과 교수 테이블을 조인하여 이름, 학년, 지도교수의 이름, 직급을 출력
+-- 단, 지도교수가 배정되지 않은 학생이름도 함께 출력하여라.
+SELECT s.name , s.grade , p.name , p.position
+FROM    student s , professor p
+WHERE  s.profno = p.profno (+);
+
+--- ANSI OUTER JOIN
+-- 1. ANSI LEFT OUTER JOIN
+SELECT s.studno, s.name, s.profno, p.name
+FROM   student s
+       LEFT OUTER JOIN professor p
+       ON  s.profno = p.profno; 
+       
+--학생 테이블과 교수 테이블을 조인하여 이름, 학년, 지도교수 이름, 직급을 출력
+-- 단, 지도학생을 배정받지 않은 교수 이름도 함께 출력하여라
+SELECT s.name , s.grade , p.name , p.position
+FROM   student s , professor p
+WHERE  s.profno(+) = p.profno
+ORDER BY p.profno;
